@@ -1,0 +1,20 @@
+(() => {
+const $=s=>document.querySelector(s);
+const grid=$("#gamesGrid");
+function renderGames(filter="all"){grid.innerHTML=GAMES.filter(g=>filter==="all"||g.category===filter).map((g,i)=>`<article class="game-card" style="--accent:${g.accent}"><div class="card-top"><div class="game-icon">${g.icon}</div><span class="game-number">ARCADE_${String(GAMES.indexOf(g)+1).padStart(2,"0")}</span></div><div class="game-category">${g.category.toUpperCase()} / ${g.difficulty}</div><h3>${g.title}</h3><p>${g.description}</p><div class="card-bottom"><span class="game-meta">◷ ${g.duration}</span><button class="play-link" data-play="${g.id}">PLAY NOW ↗</button></div></article>`).join("");grid.querySelectorAll("[data-play]").forEach(b=>b.onclick=()=>startGame(b.dataset.play))}
+$("#filters").addEventListener("click",e=>{const b=e.target.closest("[data-filter]");if(!b)return;document.querySelectorAll(".filter").forEach(x=>x.classList.remove("active"));b.classList.add("active");renderGames(b.dataset.filter)});
+function renderLeaderboard(){const data=ArcadeStore.leaderboard().slice(0,5),el=$("#leaderPreview");if(!data.length){el.innerHTML='<div class="empty-state">No scores yet. Be the first player on the board — start a game!</div>';return}el.innerHTML=data.map((p,i)=>`<div class="leader-row"><div class="leader-player"><span class="rank ${["gold","silver","bronze"][i]||""}">${String(i+1).padStart(2,"0")}</span><strong>${escapeHtml(p.player)}</strong></div><span>${p.games} ${p.games===1?"GAME":"GAMES"}</span><strong>${p.total.toLocaleString()} XP</strong></div>`).join("")}
+function escapeHtml(s){return String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
+function updatePlayer(){const p=ArcadeStore.player();$("#playerChip").textContent=p?`PLAYER: ${p.toUpperCase()}`:"GUEST PLAYER"}
+function toast(t){const el=$("#toast");el.textContent=t;el.classList.add("show");setTimeout(()=>el.classList.remove("show"),2200)}
+window.askPlayer=function(callback){$("#modalContent").innerHTML=`<div class="modal-kicker">PLAYER SETUP / 001</div><h2>WHO'S PLAYING?</h2><p>Choose your arcade nickname. Your scores will be saved locally in this browser — no account or password needed.</p><input class="nickname-input" id="nicknameInput" maxlength="18" placeholder="ENTER YOUR NICKNAME" autocomplete="nickname"><div class="game-controls"><span class="game-meta">3–18 CHARACTERS</span><button class="btn btn-primary btn-small" id="saveNickname">LET'S PLAY ↗</button></div>`;$("#modalBackdrop").classList.add("open");$("#saveNickname").onclick=()=>{const name=$("#nicknameInput").value.trim();if(name.length<3){toast("Nickname must be at least 3 characters.");return}ArcadeStore.setPlayer(name);updatePlayer();$("#modalBackdrop").classList.remove("open");callback?.()};$("#nicknameInput").addEventListener("keydown",e=>{if(e.key==="Enter")$("#saveNickname").click()});setTimeout(()=>$("#nicknameInput").focus(),100)}
+$("#heroPlay").onclick=()=>{if(!ArcadeStore.player())askPlayer(()=>document.querySelector("#games").scrollIntoView());else document.querySelector("#games").scrollIntoView()};
+$("#navPlay").onclick=$("#heroPlay").onclick;
+$("#modalClose").onclick=()=>closeArcadeModal();
+$("#modalBackdrop").addEventListener("click",e=>{if(e.target.id==="modalBackdrop")closeArcadeModal()});
+$("#menuToggle").onclick=()=>document.querySelector("nav").classList.toggle("open");
+document.querySelectorAll("nav a").forEach(a=>a.onclick=()=>document.querySelector("nav").classList.remove("open"));
+document.querySelectorAll('a[href^="#"]').forEach(a=>a.addEventListener("click",()=>{document.querySelectorAll("nav a").forEach(n=>n.classList.toggle("active",n.getAttribute("href")===a.getAttribute("href")))}));
+window.refreshLeaderboard=renderLeaderboard;
+renderGames();renderLeaderboard();updatePlayer();
+})();

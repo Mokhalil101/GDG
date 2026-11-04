@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#080d1b">
+  <meta name="description" content="GDG Tech Arcade — Play. Compete. Debug. Repeat.">
+  <title>GDG Tech Arcade | Play. Compete. Debug. Repeat.</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div class="ambient ambient-one"></div><div class="ambient ambient-two"></div>
+  <header class="topbar">
+    <a class="brand" href="#home" aria-label="GDG Tech Arcade home">
+      <span class="brand-mark"><i></i><i></i><i></i><i></i></span>
+      <span><b>GDG</b> TECH ARCADE<small>ASSIUT DEVELOPER COMMUNITY</small></span>
+    </a>
+    <nav><a href="#home" class="nav-link active">Home</a><a href="#games" class="nav-link">Games</a><a href="#leaderboard" class="nav-link">Leaderboard</a><a href="#about" class="nav-link">About</a></nav>
+    <div class="nav-actions"><span class="player-chip" id="playerChip">GUEST PLAYER</span><button class="btn btn-primary btn-small" id="navPlay">Play now <span>↗</span></button><button class="menu-toggle" id="menuToggle" aria-label="Toggle menu">☰</button></div>
+  </header>
+
+  <main>
+    <section class="hero section-wrap" id="home">
+      <div class="hero-copy">
+        <div class="eyebrow"><span class="pulse"></span> THE DEVELOPER PLAYGROUND <span class="eyebrow-line"></span> EST. GDG ASSIUT</div>
+        <h1>YOUR NEXT<br><span class="gradient-text">HIGH SCORE</span><br>STARTS HERE<span class="cursor">_</span></h1>
+        <p class="hero-sub">Welcome to your ultimate developer playground. Challenge your programming skills, solve technical puzzles, explore cybersecurity, test your AI knowledge, and compete to become the Tech Arcade Champion.</p>
+        <div class="hero-actions"><button class="btn btn-primary btn-large" id="heroPlay">PLAY NOW <span>↗</span></button><a class="btn btn-ghost btn-large" href="#games">EXPLORE GAMES <span>↓</span></a></div>
+        <div class="hero-stats"><div><b>10</b><span>ARCADE GAMES</span></div><div><b>04</b><span>CHALLENGE ZONES</span></div><div><b>∞</b><span>WAYS TO LEVEL UP</span></div></div>
+      </div>
+      <div class="hero-art">
+        <div class="orbit orbit-a"></div><div class="orbit orbit-b"></div>
+        <div class="arcade-core"><div class="core-top"><span>PLAYER_01</span><span class="live-dot">● LIVE</span></div><div class="core-symbol">&lt;/&gt;</div><div class="core-title">READY PLAYER?</div><div class="core-bottom"><span>INSERT CURIOSITY</span><span>PRESS START <b>↗</b></span></div></div>
+        <div class="float-tag tag-code">01 <span>BUG_HUNT.EXE</span></div><div class="float-tag tag-ai">✳ <span>AI MODE</span></div><div class="float-tag tag-score">★ <span>+250 XP</span></div>
+        <div class="grid-glow"></div>
+      </div>
+    </section>
+
+    <section class="ticker"><div>DEBUG YOUR LIMITS <b>✳</b> THINK FAST <b>✳</b> PLAY SMART <b>✳</b> LEVEL UP <b>✳</b> DEBUG YOUR LIMITS <b>✳</b> THINK FAST <b>✳</b> PLAY SMART <b>✳</b> LEVEL UP <b>✳</b></div></section>
+
+    <section class="section-wrap games-section" id="games">
+      <div class="section-heading"><div><div class="eyebrow">SELECT YOUR CHALLENGE</div><h2>THE <span class="gradient-text">ARCADE</span></h2></div><p>Ten ways to test your skills.<br>One leaderboard to rule them all.</p></div>
+      <div class="filter-row"><div class="filters" id="filters"><button class="filter active" data-filter="all">ALL GAMES <span>10</span></button><button class="filter" data-filter="Programming">PROGRAMMING</button><button class="filter" data-filter="Cybersecurity">CYBERSECURITY</button><button class="filter" data-filter="Logic">LOGIC</button><button class="filter" data-filter="AI">AI</button></div><div class="game-count"><span class="live-dot">●</span> 10 CHALLENGES AVAILABLE</div></div>
+      <div class="games-grid" id="gamesGrid"></div>
+    </section>
+
+    <section class="how-section section-wrap">
+      <div class="section-heading"><div><div class="eyebrow">NO DOWNLOAD. JUST SKILL.</div><h2>HOW TO <span class="gradient-text">PLAY</span></h2></div><p>Jump in, take the challenge,<br>and make every second count.</p></div>
+      <div class="steps-grid"><div class="step-card"><span class="step-num">01</span><div class="step-icon">⌁</div><h3>ENTER YOUR NAME</h3><p>Pick your player nickname. No account, no hassle.</p></div><div class="step-card"><span class="step-num">02</span><div class="step-icon">▣</div><h3>CHOOSE A GAME</h3><p>Pick a challenge from programming, security, logic or AI.</p></div><div class="step-card"><span class="step-num">03</span><div class="step-icon">◷</div><h3>BEAT THE CLOCK</h3><p>Think fast, solve puzzles and collect those points.</p></div><div class="step-card"><span class="step-num">04</span><div class="step-icon">↗</div><h3>CLIMB THE RANKS</h3><p>Save your score locally and chase the top spot.</p></div></div>
+    </section>
+
+    <section class="leader-section section-wrap" id="leaderboard">
+      <div class="section-heading"><div><div class="eyebrow">THE HALL OF FAME</div><h2>TOP <span class="gradient-text">PLAYERS</span></h2></div><a class="text-link" href="#leaderboard">VIEW LEADERBOARD ↓</a></div>
+      <div class="leaderboard-panel"><div class="leader-head"><span>RANK / PLAYER</span><span>GAMES</span><span>TOTAL XP</span></div><div id="leaderPreview"></div><div class="leader-note">LOCAL ARCADE BOARD <span>Scores are saved on this device</span></div></div>
+    </section>
+
+    <section class="about-section section-wrap" id="about"><div class="about-mark"><span class="brand-mark large"><i></i><i></i><i></i><i></i></span><span>GDG<br>ASSIUT</span></div><div><div class="eyebrow">BUILT BY THE COMMUNITY</div><h2>LEARN. BUILD. <span class="gradient-text">PLAY.</span></h2><p>GDG Assiut is a community of developers, learners, and technology enthusiasts who come together to learn, build, share knowledge, and explore new technologies. GDG Tech Arcade brings that spirit into an interactive gaming experience where learning meets fun and friendly competition.</p><a class="text-link" href="#games">FIND YOUR NEXT CHALLENGE ↗</a></div></section>
+  </main>
+  <footer><a class="brand footer-brand" href="#home"><span class="brand-mark"><i></i><i></i><i></i><i></i></span><span><b>GDG</b> TECH ARCADE<small>PLAY. COMPETE. DEBUG. REPEAT.</small></span></a><span>BUILT FOR DEVELOPERS. POWERED BY CURIOSITY.</span><span>© 2026 GDG ASSIUT</span></footer>
+
+  <div class="modal-backdrop" id="modalBackdrop"><section class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle"><button class="modal-close" id="modalClose" aria-label="Close">×</button><div id="modalContent"></div></section></div>
+  <div class="toast" id="toast"></div>
+  <script src="js/data.js"></script><script src="js/storage.js"></script><script src="js/games.js"></script><script src="js/app.js"></script>
+</body>
+</html>
